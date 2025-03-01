@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taste to Image</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
+
+</head>
+
+<body style="overflow: hidden;">
+    <div id="head_bar"></div>
+
+    <section id="leftbox">
+        <div id="left_title">
+            Taste to<br>>>><br>Image
+        </div>
+        <a href="index.html"><img src="tongue.png" id="tongue_img"></a>
+    
+        <div id="left_instruct">
+            <p>>>> 지금 <<<<br>
+                당신이<br>느끼고 있는<br>
+                불분명한<br> >>> '맛'을 <<<<br>
+                슬라이더를<br>움직이며<br>
+                >>> 자유롭게<br>
+                이미지로 <<<<br>
+                만들어보세요.</p>
+
+        </div>
+    </section>
+
+    <div id="right">
+        <div id="right_b1">
+            <img src="shape1.png" id="sha1">
+            <img src="shape2.png" id="sha2">
+            <img src="shape3.png" id="sha3">
+            <img src="shape5.png" style="transform: rotate(90deg);" id="sha4">
+        </div>
+        <div id="right_b2">
+            <span class="default-text">
+                이 웹은 텍스트의 부담은 잠시 비우게 하고, 
+                당신이 느끼고 있는 맛을 있는 그대로 이미지로 쉽게 
+                나타내어 볼 수 있게 도와줍니다.
+            </span>
+            <span class="hover-text">각각의 슬라이더의 값에 해당하는 
+                그래픽을 임의로 설정해놓은 것에 대해서는 양해를 구합니다.</span><br>
+        </div>
+
+        <div id="right_zone">
+            <div id="zone_redbar"></div>
+            <h2 style="justify-self: center; color: rgb(227, 0, 0);">
+                Make your taste profile moving sliders back and forth!</h2>
+           <div id="canvas"></div>
+
+           <div id="canvas_bottom">
+
+            <div id="input_box" method="post">
+                <label>Food<br>>>></label>
+                <select id="food-select">
+                    <option disabled selected>시식한 음식 선택</option>
+                    <option value="food1">담라 츄이 캔디</option>
+                    <option value="food2">먹태구이</option>
+                    <option value="food3">드림카카오 82%</option>
+                    <option value="food4">견과류</option>
+                    <option value="food5">이클립스</option>
+                </select> <br>
+
+                <label>Comment<br>>>></label>
+                <input type="text" id="comment" placeholder="필수x (20자 이내)"
+                size="30" maxlength="20"><br>
+
+                <button id="register" onclick="saveImage(), saveData()">
+                >>> 등록</button>
+            </div>
+
+                <div id="slider_box">
+                    <div id="slider1"></div>
+                    <div id="slider2"></div>
+                    <div id="slider3"></div>
+                    <div id="slider4"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    
+</body>
+</html>

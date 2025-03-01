@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taste to Image</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+</head>
+
+<body>
+<div id="head_bar"></div>
+
+    <section id="leftbox">
+        <div id="left_title">
+            Taste to<br>>>><br>Image
+        </div>
+        <a href="index.html"><img src="tongue.png" id="tongue_img"></a>
+    
+        <div id="left_instruct">
+            >>> 프로필이 <<<<br>완성되었습니다.
+        </div><br>
+        <span id="scroll-trigger" 
+        style="background-color: rgb(227, 0, 0); color: white;
+        font-size: 20px;">
+            프로필 갤러리</span>
+    </section>
+
+    <div id="right">
+        <div id="right_b1">
+            <img src="shape1.png" id="sha1">
+            <img src="shape2.png" id="sha2">
+            <img src="shape3.png" id="sha3">
+            <img src="shape5.png" style="transform: rotate(90deg);" id="sha4">
+        </div>
+
+        <div id="right_b2" style="text-align: right;">
+            <span class="default-text">
+                You don't need any words. Just feel and visualize it!</span>
+            <span class="hover-text">처음으로 돌아가려면 좌측의 혀를 클릭하세요..</span><br>
+        </div>
+
+        <div id="right_b3">
+            <div id="cell1">
+                <div id="cell1-top">
+                    <div id="cell1-title">
+                        Your<br>Taste<br>Profile</div>
+                    <div id="cell1-text">
+                    <label>Food >>> </label><br>
+                    <output id="outputFood"></output> <br>
+                    <label>Comment >>> </label><br>
+                    <output id="outputComment"></output>
+                    </div>
+                </div>
+                <div id="cell1-image"></div>
+                <div id="slider_box2">
+                    <div id="slider1"></div>
+                    <div id="slider2"></div>
+                    <div id="slider3"></div>
+                    <div id="slider4"></div>
+                </div>
+                <div style="text-align: center;"><br>
+                    Copyright©2025 This image is property of myself.
+                </div>
+            </div>
+
+            <div id="profile-right">
+                <span id="saveProfile">Capture it!</span><br><br>
+                (Ctrl+Shift+5) -> 캡처 후 메일로 전송이 가능합니다.<br>
+                * 다음 관람자를 위해 화면을 원래대로 되돌려 놓아주세요. 좌측 혀를 클릭하면 처음으로 돌아갑니다.
+                <div id="profile-right-null">
+                    <img src="under.png" id="arrow">
+                </div>
+                <div id="profileText">
+                    <h1>This is your identity.</h1>
+                    나의 개인적인 감각이 이미지로 잘 표현되었나요?<br>
+                    같은 음식도 각자의 경험과 감정에 따라 다르게 느껴지는 만큼,<br>
+                    이를 시각화하는 과정은 당신의 정체성을 반영하는 행위가 됩니다.<br>
+                     >>> >>> >>> >>> >>> >>> >>><br>
+                    당신의 고유한 미각 프로필이 웹 안에 등록되어 갤러리에 남게 되었습니다!<br>
+                    스크롤을 내려 하단 프로필 갤러리를 확인하세요.<br>
+                    다른 사람들의 프로필도 구경할 수 있습니다.
+                </div>
+            </div>
+        </div>
+
+        <div id="grid_Title"><h1>Profile Gallery</h1></div>
+        <div id="grid1" class="grids">
+            <div class="first-cell">>>><br>담라 츄이캔디</div>   
+        </div>
+        <div id="grid2" class="grids">
+            <div class="first-cell">>>><br>먹태구이</div>   
+        </div>
+        <div id="grid3" class="grids">
+            <div class="first-cell">>>><br>드림카카오 82%</div>   
+        </div>
+        <div id="grid4" class="grids">
+            <div class="first-cell">>>><br>견과류</div>   
+        </div>
+        <div id="grid5" class="grids">
+            <div class="first-cell">>>><br>이클립스</div>   
+        </div>
+    <script>
+
+    let sliders = [];
+
+    function setup() {
+        noCanvas();
+        const savedSliderValues = JSON.parse(localStorage.getItem('sliderValues'));
+
+        if (savedSliderValues) {
+        for (let i = 0; i < savedSliderValues.length; i++) {
+            // 저장된 값으로 슬라이더 생성
+            let slider = createSlider(0, 360, savedSliderValues[i]);
+            slider.size(100, 15);
+            slider.parent('slider' + (Math.floor(i / 5) + 1));
+
+            // 슬라이더 비활성화
+            slider.style('pointer-events', 'none');
+            slider.class('slider-custom');
+
+            // 슬라이더 배열에 저장
+            sliders.push(slider);
+        }
+        } else {
+        console.error('슬라이더 데이터 없음');
+        }  
+    }
+    
+    window.onload = function() {
+        const food = localStorage.getItem("selectedFood");
+        const comment = localStorage.getItem("userComment");
+
+        if (food) {
+                document.getElementById('outputFood').textContent = food;
+            } else {
+                document.getElementById('outputFood').textContent = '저장된 값이 없습니다.';
+            }
+
+        if (comment) {
+                document.getElementById('outputComment').textContent = comment;
+            } else {
+                document.getElementById('outputComment').textContent = ' ';
+            }
+
+        const savedImages = JSON.parse(localStorage.getItem('canvasImages')) || [];
+
+        if (savedImages.length > 0) {
+            const latestImage = savedImages[savedImages.length - 1];
+            const latestImg = document.createElement('img');
+
+            latestImg.src = latestImage.data;
+            latestImg.style.width = '100%';
+            latestImg.style.height = '100%';
+            document.getElementById('cell1-image').appendChild(latestImg);
+
+            savedImages.forEach(imageObj => {
+                const img = document.createElement('img');
+                img.src = imageObj.data;
+                img.style.width = '100%';
+                img.style.height = 'auto';
+
+                if (imageObj.food === 'food1'){
+                    document.getElementById('grid1').appendChild(img);
+                } else if (imageObj.food === 'food2'){
+                    document.getElementById('grid2').appendChild(img);
+                } else if (imageObj.food === 'food3'){
+                    document.getElementById('grid3').appendChild(img);
+                } else if (imageObj.food === 'food4'){
+                    document.getElementById('grid4').appendChild(img);
+                } else if (imageObj.food === 'food5'){
+                    document.getElementById('grid5').appendChild(img);
+                }
+            });
+        } else {
+            console.log('저장된 이미지 없음');
+        }
+    }
+    
+        document.getElementById("saveProfile").addEventListener("click", function() {
+        const cell1 = document.getElementById("cell1");
+    });
+    
+    document.getElementById("scroll-trigger").addEventListener("click", function() {
+    document.getElementById("grid_Title").scrollIntoView({ behavior: "smooth" });
+    });
+    </script>
+    
+</body>
+</html>

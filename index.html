@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taste to Image start</title>
+
+    <style>
+        body{
+            margin: 0 auto;
+            overflow: hidden;
+            font-family: 'SUIT Variable', sans-serif;
+        }
+
+        #top {
+            height: 85vh;
+            color: rgb(277, 0, 0);
+            padding: 15px;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.4em;
+            letter-spacing: 0.05em;
+        }
+
+        #bottom {
+            color: rgb(277, 0, 0);
+            font-weight: 900;
+            font-size: 80px;
+            margin-top: 10px;
+            animation: slideText 10s linear infinite;
+            
+        }
+
+        .foodimgs {
+            width: 100px;
+            z-index: 10;
+            margin: 5px;
+            border: 1.5px dashed rgb(277, 0, 0);
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .foodimgs:hover{
+            cursor: grab;
+        }
+
+        .foodimgs.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        @keyframes slideText {
+                0% {
+            transform: translateX(-50vw);
+            }
+                100% {
+            transform: translateX(100vw);
+            }
+        }
+
+        #tong {
+            position: absolute;
+            width: 500px;
+            left: 55vw;
+            top: 150px;
+            transition: transform 0.5s ease;
+        }
+
+        #tong:hover{
+            transform: scale(1.05);
+        }
+
+        .text-box{
+            position: absolute;
+            border: 1px dashed rgb(277, 0, 0);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: 500;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out;
+            color: rgb(277, 0, 0);
+            background-color: white;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="top">
+        ‘맛’이라고 하면 우리는 흔히 혀로 느끼는 미각, 즉 쓴맛, 단맛, 신맛, 감칠맛, 짠맛을 떠올립니다.<br>
+        하지만 이 다섯 가지 감각만으로 내가 느끼는 맛을 온전히 표현할 수 있을까요?<br>
+        음식의 맛은 단순한 미각이 아니라, 각자의 경험과 감정, 이야기가 뒤섞인 복잡한 감각입니다.<br>
+        혀가 특정 미각을 감지한다고 해도, 그것만으로 내가 느끼는 맛을 완벽하게 설명할 순 없죠.<br>
+        이 웹 안에서 당신만의 주관적인 감각을 이미지로 자유롭게 기록해보세요.<br>그렇게 쌓인 기록은 결국 당신의 정체성이 담긴 프로필이 되어 웹에 축적될 것입니다.
+        <h4>>>> 시식한 음식을 혀에 드래그하세요..<br>
+            >>> Drag and drop the food you ate onto this tongue..</h4></span><br>
+        <img src="Damla.png" class="foodimgs" style="width: 70px;" draggable="true">
+        <img src="fish.png" class="foodimgs" draggable="true">
+        <img src="choco.png" class="foodimgs" style="width: 50px;" draggable="true">
+        <img src="nuts.png" class="foodimgs" draggable="true">
+        <img src="eclipse.png" class="foodimgs" style="width: 70px;" draggable="true">
+    </div>
+    <img src="tongue_bigger.png" id="tong">
+    <div id="bottom">
+        Taste to >>> Image
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let draggedImg = null;
+    
+            const images = document.querySelectorAll(".foodimgs");
+            const tongue = document.getElementById("tong");
+
+            const textBoxes = [];
+            const textContents = ["우리 할머니 손맛", 
+            "한 입 베어물 때 부드럽고.. 달콤하고..", 
+            "군침이 싹", "니 맛도 내 맛도 아닌 맛", 
+            "추억이 새록새록", "단짠단짠", "너무나 조화롭다"]
+
+            const textPositions = [
+                { x: -400, y: -50 }, 
+                { x: 150, y: -200 },   
+                { x: -70, y: 0 },  
+                { x: 150, y: 20 },    
+                { x: 50, y: 60 }, //추억  
+                { x: -240, y: 90 },    
+                { x: 10, y: 240 }  //혀 기준 상대위치
+            ]
+
+            for (let i = 0; i < 7; i++) {
+                const box = document.createElement("div");
+                box.classList.add("text-box");
+                box.textContent = textContents[i];
+                document.body.appendChild(box);
+                textBoxes.push(box);
+            }
+    
+            images.forEach(img => {
+                img.addEventListener("dragstart", (e) => {
+                    draggedImg = e.target; // 현재 드래그 중인 요소 저장
+                    e.target.classList.add("dragging");
+
+                    e.dataTransfer.setDragImage(e.target, 0, 0);
+                });
+    
+                img.addEventListener("dragend", (e) => {
+                    e.target.classList.remove("dragging");
+                });
+                img.addEventListener("dragover", (e) => e.preventDefault());
+            });
+    
+            document.body.addEventListener("dragover", (e) => {
+                e.preventDefault();
+
+                const tongueRect = tongue.getBoundingClientRect();
+                if (
+                    e.clientX > tongueRect.left &&
+                    e.clientX < tongueRect.right &&
+                    e.clientY > tongueRect.top &&
+                    e.clientY < tongueRect.bottom
+                ) {
+                    tongue.style.transform = "scale(1.05)"; // 혀 위에 올라가면 확대
+
+                    textBoxes.forEach((box, index) => {
+                        box.style.left = `${tongueRect.left + tongueRect.width / 2 + textPositions[index].x}px`;
+                        box.style.top = `${tongueRect.top + tongueRect.height / 2 + textPositions[index].y}px`;
+                        box.style.visibility = "visible";
+                        box.style.opacity = "1";
+                    });
+                } else {
+                    tongue.style.transform = "scale(1)"; // 벗어나면 원래 크기
+
+                    textBoxes.forEach(box => {
+                        box.style.visibility = "hidden";
+                        box.style.opacity = "0";
+                     });
+                }
+            });
+    
+            document.body.addEventListener("drop", (e) => {
+                e.preventDefault();
+                if (draggedImg) {
+                    draggedImg.style.position = "absolute";
+                    draggedImg.style.left = `${e.clientX - draggedImg.width / 2}px`;
+                    draggedImg.style.top = `${e.clientY - draggedImg.height / 2}px`;
+
+                    const tongueRect = tongue.getBoundingClientRect(); // tongue 위치 정보
+                    if (
+                        e.clientX > tongueRect.left &&
+                        e.clientX < tongueRect.right &&
+                        e.clientY > tongueRect.top &&
+                        e.clientY < tongueRect.bottom
+                    ) {
+                        // ✅ tongue 위에서 drop되면 페이지 이동
+                        window.location.href = "index2.html"; // 이동할 페이지 경로 설정
+                    }
+
+                    draggedImg = null; // 드래그가 끝나면 초기화
+                }
+
+                textBoxes.forEach(box => {
+                    box.style.visibility = "hidden";
+                    box.style.opacity = "0";
+            });
+        });
+    });
+    </script>
+    
+    
+    
+</body>
+</html>
