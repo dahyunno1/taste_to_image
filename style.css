@@ -56,7 +56,7 @@ body {
     color: rgb(227, 0, 0);
     line-height: 1.4em;
     letter-spacing: 0.5px;
-    margin-top: 250px;
+    margin-top: 200px;
 }
 
 #right{
@@ -246,7 +246,7 @@ canvas{
     justify-content: center;
     padding: 10px;
     flex-direction: column;
-    width: 450px;
+    width: 500px;
     float: left;
     margin: 30px;
     color: rgb(227, 0, 0);
@@ -324,11 +324,11 @@ canvas{
 
   #profile-right{
     float: left;
-    margin-top: 30px;
+    margin-top: 35px;
     background-color: white;
     color: rgb(227, 0, 0);
     font-weight: 500;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.5em;
     letter-spacing: 0.4px;
   }
