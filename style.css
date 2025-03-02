@@ -351,9 +351,6 @@ canvas{
   }
 
   #arrow 
-    position: absolute;
-    top : 70%;
-    left: 80%;
     width: 200px;
     animation: blink 0.8s ease-in-out infinite alternate;
   }
