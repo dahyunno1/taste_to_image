@@ -246,7 +246,7 @@ canvas{
     justify-content: center;
     padding: 10px;
     flex-direction: column;
-    width: 500px;
+    width: 550px;
     float: left;
     margin: 30px;
     color: rgb(227, 0, 0);
@@ -281,16 +281,16 @@ canvas{
     background-color: white;
     color: rgb(227, 0, 0);
     font-weight: 800;
-    font-size: 40px;
+    font-size: 50px;
     line-height: 1.1em;
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
 #cell1-text{
     background-color: white;
     color: rgb(227, 0, 0);
     font-weight: 700;
-    font-size: 20px;
+    font-size: 25px;
     float: left;
     line-height: 1.3em;
 }
@@ -328,13 +328,13 @@ canvas{
     background-color: white;
     color: rgb(227, 0, 0);
     font-weight: 500;
-    font-size: 20px;
+    font-size: 25px;
     line-height: 1.5em;
     letter-spacing: 0.4px;
   }
 
   #saveProfile{
-    font-size: 60px;
+    font-size: 60pxs;
     font-weight: 700;
   }
 
@@ -350,10 +350,18 @@ canvas{
     justify-content: flex-end;
   }
 
+  #arrow-container {
+    float: left;
+    margin-top: 600px;
+    margin-right: 20px;
+  }
+
   #arrow {
-    width: 200px;
+    width: 250px;
     animation: blink 0.8s ease-in-out infinite alternate;
   }
+
+  #arrow:hover{cursor: pointer;}
 
   @keyframes blink {
     0% {opacity: 0;}
@@ -362,8 +370,8 @@ canvas{
 
   #profileText{
     font-weight: 500;
-    font-size: 18px;
-    width: 600px;
+    font-size: 25px;
+    width: 750px;
     line-height: 1.5em;
     letter-spacing: 0.4px;
   }
@@ -392,8 +400,10 @@ canvas{
 
 .grids:hover{
     width: 130%;
-    font-size: 60px;
+    font-size: 70px;
     color: #15299e;
 }
 
-#scroll-trigger:hover{ cursor: pointer; text-decoration: underline;}
+#scroll-trigger:hover{
+    cursor: pointer; text-decoration: underline;
+}
