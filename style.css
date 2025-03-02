@@ -25,7 +25,7 @@ body {
 }
 
 #left_title{
-    font-size: 60px;
+    font-size: 70px;
     font-weight: 900;
     color: rgb(227, 0, 0);
     line-height: 1em;
@@ -187,7 +187,7 @@ canvas{
 #input_box{
     color: rgb(227, 0, 0);
     font-weight: 700;
-    font-size: 20px;
+    font-size: 22px;
     flex-direction: column;
 
 }
@@ -222,7 +222,7 @@ canvas{
     text-align: right;
     margin-top: 0.5em;
     color: rgb(227, 0, 0);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     border: 1px solid rgb(227, 0, 0);
     border-radius: 5px;
