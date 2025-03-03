@@ -222,13 +222,13 @@ canvas{
     text-align: right;
     margin-top: 0.7em;
     color: rgb(227, 0, 0);
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
-    border: 1px solid rgb(227, 0, 0);
+    border: 2px dashed rgb(227, 0, 0);
     border-radius: 5px;
-    padding: 3px 5px;
+    padding: 3px 7px;
     background-color: white;
-    justify-self: right;
+    margin-left: 67%;
 }
 
 #register:hover {
@@ -407,3 +407,4 @@ canvas{
 #scroll-trigger:hover{
     cursor: pointer; text-decoration: underline;
 }
+
