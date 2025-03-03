@@ -279,3 +279,21 @@ function saveData() {
   localStorage.setItem("userComment", comment);
   window.location.href = 'index3.html';
 }
+
+let timeout; // 타이머 변수
+
+    function resetTimer() {
+        clearTimeout(timeout); // 기존 타이머 초기화
+        timeout = setTimeout(() => {
+            window.location.href = "index.html"; // 이동할 페이지 설정
+        }, 60000); // 30초 (30000ms) 동안 아무 행동 없으면 이동
+    }
+
+    // 이벤트 리스너 추가 (사용자가 움직이면 타이머 리셋)
+    document.addEventListener("mousemove", resetTimer);
+    document.addEventListener("keydown", resetTimer);
+    document.addEventListener("click", resetTimer);
+    document.addEventListener("scroll", resetTimer);
+
+    // 페이지 로드 시 타이머 시작
+    resetTimer();
