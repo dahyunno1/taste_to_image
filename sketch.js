@@ -286,7 +286,7 @@ let timeout; // 타이머 변수
         clearTimeout(timeout); // 기존 타이머 초기화
         timeout = setTimeout(() => {
             window.location.href = "index.html"; // 이동할 페이지 설정
-        }, 60000); // 30초 (30000ms) 동안 아무 행동 없으면 이동
+        }, 40000); // 30초 (30000ms) 동안 아무 행동 없으면 이동
     }
 
     // 이벤트 리스너 추가 (사용자가 움직이면 타이머 리셋)
