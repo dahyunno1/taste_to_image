@@ -47,6 +47,15 @@ body {
     cursor: pointer;
 }
 
+#back-text {
+    position: absolute;
+    top: 25%;
+    left: 55%;
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+
+}
 
 
 #left_instruct{
